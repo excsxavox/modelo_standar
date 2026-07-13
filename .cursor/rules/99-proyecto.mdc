@@ -7,7 +7,36 @@ alwaysApply: true
 <!-- Rama: proyecto/hola-mundo -->
 - Nombre: HolaMundo
 - Stack: HTML, CSS, JavaScript (vanilla) — sin framework
-- Descripción: Proyecto de componentes UI en HTML/CSS/JS con estructura modular por componente
-- Estructura: src/components/ (componentes individuales), src/index.html, src/styles.css, src/script.js
+- Descripción: Librería de componentes UI estáticos con estructura modular por componente
 - Entornos: local / estático
-- Notas: cada componente vive en su propio .html dentro de src/components/
+
+## Arquitectura
+- Tipo: Frontend estático — sin backend, sin servidor
+- Patrón: Componente independiente (cada componente es un .html autónomo)
+- Sin estado global — cada componente gestiona su propio comportamiento
+
+## Estructura del proyecto
+```
+src/
+  index.html              ← punto de entrada principal
+  styles.css              ← estilos globales
+  script.js               ← lógica global
+  components/
+    [nombre].html         ← un archivo por componente (button, card, form, etc.)
+  images/
+    logo.png
+```
+
+## Capas (aplica modo frontend only)
+```
+ENTRADA: interacción del usuario (click, input, evento)
+  └── Componente .html     ← estructura y presentación
+        └── styles.css     ← estilos del componente
+              └── script.js ← comportamiento del componente
+SALIDA: respuesta visual en el navegador
+```
+
+## Notas
+- No hay controladores ni servicios — todo es presentación
+- Para cambios: activar fases de Historias + Frontend + Pruebas visuales
+- Nuevo componente → crear [nombre].html en src/components/
