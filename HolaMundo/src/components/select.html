@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Componente de Lista Desplegable</title>
+    <style>
+        .select-container {
+            position: relative;
+            width: 200px;
+            margin: 20px;
+        }
+
+        .select-selected {
+            background-color: #f8f8f8;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .select-selected:after {
+            position: absolute;
+            content: "";
+            top: 14px;
+            right: 10px;
+            width: 0;
+            height: 0;
+            border: 6px solid transparent;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        .select-selected.select-arrow-active:after {
+            border-color: transparent transparent #555 transparent;
+            top: 7px;
+        }
+
+        .select-items {
+            position: absolute;
+            background-color: #f8f8f8;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 99;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            display: none;
+        }
+
+        .select-items div {
+            padding: 10px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .select-items div:hover {
+            background-color: #e2e2e2;
+        }
+
+        .select-hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="select-container">
+        <div class="select-selected">Selecciona una opción</div>
+        <div class="select-items select-hide">
+            <div>Opción 1</div>
+            <div>Opción 2</div>
+            <div>Opción 3</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectContainers = document.querySelectorAll('.select-container');
+
+            selectContainers.forEach(container => {
+                const selected = container.querySelector('.select-selected');
+                const items = container.querySelector('.select-items');
+
+                selected.addEventListener('click', function() {
+                    items.classList.toggle('select-hide');
+                    selected.classList.toggle('select-arrow-active');
+                });
+
+                const options = items.querySelectorAll('div');
+                options.forEach(option => {
+                    option.addEventListener('click', function() {
+                        selected.textContent = this.textContent;
+                        items.classList.add('select-hide');
+                        selected.classList.remove('select-arrow-active');
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

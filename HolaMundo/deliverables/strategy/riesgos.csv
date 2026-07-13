@@ -1,0 +1,11 @@
+id,riesgo,probabilidad,impacto,mitigacion,responsable,estado
+1,Retraso en la entrega del proyecto,Alta,Alto,Establecer un cronograma detallado y realizar reuniones regulares,Project Manager,En progreso
+2,Problemas técnicos durante el desarrollo,Media,Alto,Implementar un sistema de seguimiento y monitoreo y realizar pruebas exhaustivas,Equipo de desarrollo,En progreso
+3,Vulnerabilidades de seguridad en la página web,Alta,Alto,Implementar medidas de seguridad como pruebas de penetración y análisis de vulnerabilidades,Equipo de seguridad,En progreso
+4,Falta de recursos para el proyecto,Media,Alto,Identificar y asignar recursos adicionales y establecer prioridades,Project Manager,En progreso
+5,Problemas de compatibilidad con diferentes navegadores y dispositivos,Media,Alto,Realizar pruebas exhaustivas y revisiones de código,Equipo de pruebas,En progreso
+6,Error en la implementación de la funcionalidad de seguimiento,Media,Alto,Realizar pruebas exhaustivas y revisiones de código,Equipo de desarrollo,En progreso
+7,Falta de documentación técnica y de usuario,Media,Alto,Crear documentación técnica y de usuario detallada,Equipo de desarrollo,En progreso
+8,Problemas de comunicación entre los equipos,Media,Alto,Establecer un plan de comunicación y realizar reuniones regulares,Project Manager,En progreso
+9,Error en la configuración del servidor y entorno de producción,Alta,Alto,Implementar un sistema de seguimiento y monitoreo y realizar pruebas exhaustivas,Equipo de infraestructura,En progreso
+10,Falta de análisis de retorno de la inversión (ROI),Media,Alto,Realizar un análisis de ROI detallado,Project Manager,En progreso

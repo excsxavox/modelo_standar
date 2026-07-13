@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Button Component</title>
+    <style>
+        .radio-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .radio-input {
+            opacity: 0;
+            position: absolute;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .radio-input:checked + .radio-label {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .radio-input:focus + .radio-label {
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.5);
+        }
+
+        .radio-custom {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid #4CAF50;
+            margin-right: 10px;
+            position: relative;
+        }
+
+        .radio-input:checked + .radio-label .radio-custom::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: white;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="radio-container">
+        <input type="radio" id="radio1" name="radio-group" class="radio-input">
+        <label for="radio1" class="radio-label">
+            <span class="radio-custom"></span>
+            Opción 1
+        </label>
+    </div>
+
+    <div class="radio-container">
+        <input type="radio" id="radio2" name="radio-group" class="radio-input">
+        <label for="radio2" class="radio-label">
+            <span class="radio-custom"></span>
+            Opción 2
+        </label>
+    </div>
+
+    <div class="radio-container">
+        <input type="radio" id="radio3" name="radio-group" class="radio-input">
+        <label for="radio3" class="radio-label">
+            <span class="radio-custom"></span>
+            Opción 3
+        </label>
+    </div>
+</body>
+</html>

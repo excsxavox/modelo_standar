@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Componente de Audio</title>
+    <style>
+        .audio-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+        .audio-player {
+            width: 100%;
+            max-width: 600px;
+        }
+        .audio-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="audio-container">
+        <audio class="audio-player" controls>
+            <source src="audio.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+        <div class="audio-controls">
+            <button id="play-btn">Reproducir</button>
+            <button id="pause-btn">Pausar</button>
+            <button id="stop-btn">Detener</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioPlayer = document.querySelector('.audio-player');
+            const playBtn = document.getElementById('play-btn');
+            const pauseBtn = document.getElementById('pause-btn');
+            const stopBtn = document.getElementById('stop-btn');
+
+            playBtn.addEventListener('click', function() {
+                audioPlayer.play();
+            });
+
+            pauseBtn.addEventListener('click', function() {
+                audioPlayer.pause();
+            });
+
+            stopBtn.addEventListener('click', function() {
+                audioPlayer.pause();
+                audioPlayer.currentTime = 0;
+            });
+        });
+    </script>
+</body>
+</html>

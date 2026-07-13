@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Datos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Fecha de Registro</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los datos se cargarán dinámicamente con JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        // Datos de ejemplo
+        const sampleData = [
+            { id: 1, name: "Juan Pérez", email: "juan@example.com", registrationDate: "2023-01-15" },
+            { id: 2, name: "María García", email: "maria@example.com", registrationDate: "2023-02-20" },
+            { id: 3, name: "Carlos López", email: "carlos@example.com", registrationDate: "2023-03-10" },
+            { id: 4, name: "Ana Martínez", email: "ana@example.com", registrationDate: "2023-04-05" },
+            { id: 5, name: "Luis Rodríguez", email: "luis@example.com", registrationDate: "2023-05-12" }
+        ];
+
+        // Función para cargar datos en la tabla
+        function loadTableData(data) {
+            const tableBody = document.querySelector('#dataTable tbody');
+
+            // Limpiar tabla existente
+            tableBody.innerHTML = '';
+
+            // Agregar filas con datos
+            data.forEach(item => {
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+                    <td>${item.id}</td>
+                    <td>${item.name}</td>
+                    <td>${item.email}</td>
+                    <td>${item.registrationDate}</td>
+                `;
+
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Cargar datos cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', () => {
+            loadTableData(sampleData);
+        });
+    </script>
+</body>
+</html>

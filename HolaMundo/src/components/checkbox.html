@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkbox Component</title>
+    <style>
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .checkbox-input {
+            margin-right: 10px;
+        }
+
+        .checkbox-label {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="checkbox-container">
+        <input type="checkbox" id="myCheckbox" class="checkbox-input">
+        <label for="myCheckbox" class="checkbox-label">Acepto los términos y condiciones</label>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkbox = document.getElementById('myCheckbox');
+
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    console.log('Checkbox marcado');
+                } else {
+                    console.log('Checkbox desmarcado');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

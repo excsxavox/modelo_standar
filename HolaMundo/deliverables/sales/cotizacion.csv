@@ -1,0 +1,6 @@
+id,concepto,descripcion,cantidad,unidad,precio_unitario,subtotal,notas
+1,"Desarrollo de Página Web Estática","Desarrollo de una página web estática con el mensaje 'Hola Mundo'",1,unidad,5000,5000,"Incluye diseño responsive y compatibilidad con navegadores modernos"
+2,"Implementación de Sistema de Seguimiento","Implementación de un sistema básico de seguimiento para registrar eventos y visitas",1,unidad,3000,3000,"Incluye integración con herramientas de análisis web"
+3,"Pruebas de Compatibilidad","Pruebas de compatibilidad en diferentes navegadores y dispositivos",1,unidad,2000,2000,"Incluye pruebas en Chrome, Firefox, Safari y Edge"
+4,"Documentación Técnica","Documentación técnica detallada del proyecto",1,unidad,1500,1500,"Incluye guías de usuario y desarrollador"
+5,"Soporte Técnico","Soporte técnico durante 3 meses post-implementación",3,meses,1000,3000,"Incluye resolución de issues y actualizaciones menores"

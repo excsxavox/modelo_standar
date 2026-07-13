@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta</title>
+    <style>
+        .card {
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .card-header {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-footer {
+            background-color: #f8f9fa;
+            padding: 10px 15px;
+            border-top: 1px solid #ddd;
+            text-align: right;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .card-text {
+            margin: 10px 0;
+            color: #666;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Título de la Tarjeta</h3>
+        </div>
+        <div class="card-body">
+            <p class="card-text">Este es el contenido de la tarjeta. Puedes agregar cualquier información relevante aquí.</p>
+        </div>
+        <div class="card-footer">
+            <button class="btn">Acción</button>
+        </div>
+    </div>
+</body>
+</html>

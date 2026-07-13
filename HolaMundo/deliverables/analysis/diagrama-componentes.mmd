@@ -1,0 +1,18 @@
+graph TD
+    A[Frontend] -->|HTML5| B[Interfaz de Usuario]
+    A -->|CSS3| C[Estilos]
+    A -->|JavaScript| D[Lógica de Negocio]
+    B -->|Renderiza| E[Página Hola Mundo]
+    C -->|Aplica estilos| E
+    D -->|Controla| E
+    F[Backend] -->|Node.js| G[API]
+    G -->|Procesa| H[Datos]
+    F -->|Express| I[Rutas]
+    I -->|Maneja| J[Solicitudes HTTP]
+    J -->|Devuelve| K[Respuestas]
+    L[Hosting] -->|Vercel/Netlify| M[Servidor Estático]
+    M -->|Sirve| E
+    N[CI/CD] -->|GitHub Actions| O[Integración Continua]
+    O -->|Despliega| M
+    P[Repositorio] -->|Git| Q[Código Fuente]
+    Q -->|Versionado| R[Historial de Cambios]

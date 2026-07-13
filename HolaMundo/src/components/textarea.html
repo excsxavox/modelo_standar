@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área de Texto</title>
+    <style>
+        .textarea-container {
+            margin: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .textarea-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .textarea-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 100px;
+        }
+        .textarea-input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+        .char-counter {
+            margin-top: 5px;
+            font-size: 12px;
+            color: #666;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="textarea-container">
+        <label for="message" class="textarea-label">Mensaje:</label>
+        <textarea id="message" class="textarea-input" placeholder="Escribe tu mensaje aquí..." maxlength="500"></textarea>
+        <div class="char-counter">
+            <span id="char-count">0</span>/500 caracteres
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const textarea = document.getElementById('message');
+            const charCount = document.getElementById('char-count');
+
+            textarea.addEventListener('input', function() {
+                const currentLength = textarea.value.length;
+                charCount.textContent = currentLength;
+            });
+        });
+    </script>
+</body>
+</html>
