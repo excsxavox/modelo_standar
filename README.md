@@ -5,38 +5,50 @@ Repositorio independiente que contiene las reglas y metodología para trabajar c
 ## Estructura
 
 ```
-.cursor/
-  rules/
-    mi-metodologia.mdc   ← único archivo de reglas (alwaysApply: true)
+metodologia/
+  rules/               ← fuente de verdad de las reglas (editar aquí)
+    00-perfil.mdc
+    01-fases.mdc
+    02-historias.mdc
+    03-calidad.mdc
+    04-pruebas.mdc
+    99-proyecto.mdc    ← única sección que cambia por proyecto
+  templates/           ← plantillas reutilizables
+    user-story.md
+    design.md
+    cleanup.md
+    test-case.md
+    validation.md
+  setup.ps1            ← activa las reglas en el proyecto destino
 README.md
 ```
 
+> Las reglas viven en `metodologia/rules/`. El script `setup.ps1` las copia a `.cursor/rules/` para que Cursor las lea.
+
 ## Cómo funciona
 
-El archivo `mi-metodologia.mdc` tiene 6 secciones:
-
-| Sección | Contenido | ¿Cambia? |
-|---------|-----------|----------|
-| 1. Perfil personal | Nombre, idioma, estilo de respuesta | No |
-| 2. Fases de desarrollo | Fases opcionales disponibles | No |
-| 3. Historias de usuario | Formato y criterios de aceptación | No |
-| 4. Calidad y limpieza | Estándares de código | No |
-| 5. Pruebas y validación | Estructura AAA, validación funcional | No |
-| 6. Proyecto actual | Config del proyecto activo | **Solo esta** |
+| Módulo | Contenido | ¿Cambia? |
+|--------|-----------|----------|
+| `00-perfil.mdc` | Nombre, idioma, estilo de respuesta | No |
+| `01-fases.mdc` | Fases opcionales de desarrollo | No |
+| `02-historias.mdc` | Formato de historias de usuario | No |
+| `03-calidad.mdc` | Estándares de calidad y limpieza | No |
+| `04-pruebas.mdc` | Pruebas unitarias y validación funcional | No |
+| `99-proyecto.mdc` | Config del proyecto activo | **Solo esta** |
 
 ## Uso por proyecto
 
 ### Nuevo proyecto
 
-```bash
+```powershell
 git checkout main
 git checkout -b proyecto/nombre-del-proyecto
 ```
 
-Luego edita solo la Sección 6 del archivo `.cursor/rules/mi-metodologia.mdc`:
+Edita solo `metodologia/rules/99-proyecto.mdc`:
 
 ```markdown
-# 6. Proyecto actual
+# Proyecto actual
 - Nombre: Mi App
 - Stack: React, Node.js, PostgreSQL
 - Descripción: Plataforma de gestión de tareas
@@ -44,23 +56,30 @@ Luego edita solo la Sección 6 del archivo `.cursor/rules/mi-metodologia.mdc`:
 - Notas: API REST en /api/v1, autenticación con JWT
 ```
 
+Luego activa las reglas en el proyecto:
+
+```powershell
+.\metodologia\setup.ps1
+```
+
 ### Listar proyectos activos
 
-```bash
+```powershell
 git branch
 ```
 
 ### Actualizar la metodología base
 
-```bash
+```powershell
 git checkout main
-# editar mi-metodologia.mdc (secciones 1-5 únicamente)
+# editar metodologia/rules/ (módulos 00-04 únicamente)
 git add .
 git commit -m "mejora: [descripción del cambio]"
 
 # Aplicar la mejora a un proyecto existente
 git checkout proyecto/nombre-del-proyecto
 git merge main
+.\metodologia\setup.ps1   # re-activar reglas actualizadas
 ```
 
 ## Ramas disponibles
@@ -70,7 +89,7 @@ git merge main
 
 ## Fases disponibles
 
-Al iniciar un cambio con el agente, este preguntará qué fases activar:
+Al iniciar un cambio, el agente preguntará qué fases activar:
 
 - **Historias de usuario** — Para requerimientos nuevos o poco claros
 - **Diseño** — Para cambios con impacto en arquitectura

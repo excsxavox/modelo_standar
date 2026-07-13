@@ -2,7 +2,7 @@
 # Uso: .\metodologia\setup.ps1
 # Ejecutar desde la raíz del proyecto destino
 
-$origen = Join-Path $PSScriptRoot "modulos"
+$origen = Join-Path $PSScriptRoot "rules"
 $destino = Join-Path (Get-Location) ".cursor\rules"
 
 if (-not (Test-Path $destino)) {
