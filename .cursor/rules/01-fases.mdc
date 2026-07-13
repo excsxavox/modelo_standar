@@ -1,23 +1,52 @@
 ---
-description: Fases opcionales de desarrollo - preguntar cuáles activar
+description: Fases opcionales de desarrollo y flujo completo con sincronización
 alwaysApply: true
 ---
 
-# Fases de desarrollo
+# Flujo al recibir una historia o requerimiento
 
-Al iniciar cualquier cambio o funcionalidad, preguntar:
+## Paso 1 — Leer el estado actual (siempre)
+Antes de cualquier acción, leer `specs/` para entender qué existe hoy:
+- `specs/historias/` → historias ya implementadas
+- `specs/diseno/` → arquitectura, frontend y backend actuales
+- `specs/tecnologias/` → stack vigente
+
+## Paso 2 — Preguntar qué fases activar
 > "¿Qué fases quieres activar para este cambio?"
 
-Fases disponibles (ninguna es obligatoria):
+| Fase | Template a usar | Cuándo activarla |
+|------|----------------|-----------------|
+| Historias de usuario | `metodologia/templates/historias/user-story.md` | Requerimiento nuevo o poco claro |
+| Diseño — Arquitectura | `metodologia/templates/diseno/arquitectura.md` | Impacto en estructura del sistema |
+| Diseño — Frontend | `metodologia/templates/diseno/frontend.md` | Cambios en UI o componentes |
+| Diseño — Backend | `metodologia/templates/diseno/backend.md` | Nuevos endpoints o modelos |
+| Diseño — Tecnologías | `metodologia/templates/diseno/tecnologias.md` | Agregar o cambiar tech |
+| Limpieza | `metodologia/templates/calidad/cleanup.md` | Deuda técnica visible |
+| Pruebas unitarias | `metodologia/templates/pruebas/test-case.md` | Lógica crítica |
+| Validación funcional | `metodologia/templates/pruebas/validation.md` | Verificar contra historias |
 
-| Fase | Cuándo usarla |
-|------|--------------|
-| Historias de usuario | Requerimiento nuevo o poco claro |
-| Diseño | Cambio con impacto en arquitectura o flujo |
-| Limpieza | Hay deuda técnica visible antes de implementar |
-| Calidad | Revisión de estándares tras implementar |
-| Pruebas unitarias | Lógica crítica o reglas de negocio |
-| Validación funcional | Verificar que cumple lo que el usuario pidió |
+## Paso 3 — Crear la carpeta del cambio
+```
+trabajo/
+  [nombre-cambio]/        ← crear esta carpeta
+    ESTADO.md             ← copiar desde trabajo/_template/ESTADO.md
+    historias/            ← si fase activa
+    diseno/               ← si fase activa
+    calidad/              ← si fase activa
+    pruebas/              ← si fase activa
+```
 
-Si el usuario no indica fases, sugerir las más relevantes según el contexto.
-Plantillas disponibles en: `metodologia/templates/`
+Copiar solo las subcarpetas de las fases activadas.
+Llenar cada template con la información del cambio actual.
+
+## Paso 4 — Implementar
+Ejecutar las tareas del `ESTADO.md` marcando el progreso.
+Si algo cambia durante la implementación, actualizar los templates del cambio.
+
+## Paso 5 — Sincronizar specs/ al cerrar (obligatorio)
+Al completar el cambio, actualizar solo los deltas en `specs/`:
+- Nuevas historias → agregar archivo en `specs/historias/`
+- Cambios de diseño → actualizar solo la sección afectada en `specs/diseno/`
+- Cambios de tech → actualizar `specs/tecnologias/stack.md`
+
+Luego mover la carpeta a `trabajo/archive/[YYYY-MM-DD]-[nombre-cambio]/`.
