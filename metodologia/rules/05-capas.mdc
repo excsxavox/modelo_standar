@@ -52,13 +52,41 @@ Nunca implementar una capa sin tener la capa inferior lista.
 
 ---
 
-# Sincronización con specs/
+# Diagramas .mmd por controlador o endpoint
 
-Al cerrar un cambio, actualizar `specs/diseno/backend.md`
-documentando cada capa afectada en el orden del Mapa de capas:
+Por cada controlador o endpoint nuevo o modificado, generar un archivo `.mmd`
+usando la plantilla `metodologia/templates/diseno/diagramas/diagrama-capas.mmd`.
+
+## Reglas de generación
+
+- Un archivo `.mmd` por cada controlador o endpoint (no uno global)
+- Nombre del archivo: `[metodo]-[recurso].mmd`
+  - Ejemplo: `post-usuarios.mmd`, `get-productos-id.mmd`
+- Durante el cambio activo: guardar en `trabajo/[nombre-cambio]/diseno/diagramas/`
+- Al cerrar el cambio (sync): mover a `specs/diseno/diagramas/`
+
+## Estructura mínima del .mmd
 
 ```
-ENTRADA → Route → Controller → Service → Repository → Model → BD → SALIDA
+flowchart TD
+    entrada["POST /api/usuarios"] --> Controller
+    Controller --> Service
+    Service --> Repository
+    Repository --> Model
+    Model --> BD[("tabla: usuarios")]
+    BD --> salida["201 { id, nombre }"]
 ```
+
+Incluir en cada nodo:
+- **Controller**: nombre de clase y método
+- **Service**: nombre de clase, método y regla de negocio principal
+- **Repository**: nombre de clase, método y tipo de query
+- **Model**: nombre y campos principales
+- **BD**: nombre de tabla o colección
+
+## Sincronización con specs/
+
+Al cerrar un cambio, aplicar solo deltas en `specs/diseno/backend.md`
+y mover los `.mmd` generados a `specs/diseno/diagramas/`.
 
 Solo registrar las capas que cambiaron — no reescribir las que no se tocaron.

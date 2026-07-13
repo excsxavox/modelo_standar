@@ -85,3 +85,16 @@ SALIDA: [descripción del output — HTTP response, evento emitido, etc.]
 | Repository | [archivo] | Nuevo / Modifica |
 | Model | [archivo] | Nuevo / Modifica |
 | BD | [tabla/migración] | Nuevo / Modifica |
+
+---
+
+## Diagramas .mmd generados
+
+Por cada controlador o endpoint de este cambio, el agente genera un `.mmd`
+usando `metodologia/templates/diseno/diagramas/diagrama-capas.mmd`.
+
+| Endpoint | Archivo .mmd | Ubicación |
+|----------|-------------|-----------|
+| [METODO /ruta] | [metodo-recurso.mmd] | `trabajo/[cambio]/diseno/diagramas/` |
+
+Al cerrar el cambio → mover a `specs/diseno/diagramas/`.

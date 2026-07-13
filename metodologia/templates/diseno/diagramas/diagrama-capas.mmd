@@ -1,0 +1,34 @@
+%%  Diagrama de capas — [NombreControlador] / [METODO /ruta/endpoint]
+%%  Generado por el agente al crear o sincronizar un cambio
+%%  Guardar en: trabajo/[nombre-cambio]/diseno/diagramas/[nombre].mmd
+%%              specs/diseno/diagramas/[nombre].mmd  (al cerrar el cambio)
+
+flowchart TD
+    entrada["[METODO] /api/[ruta]\nRequest: { [campos] }"]
+
+    subgraph controlador ["Controller"]
+        ctrl["[NombreController]\n[nombreMetodo]()\nValida: [campos validados]"]
+    end
+
+    subgraph servicio ["Service"]
+        svc["[NombreService]\n[nombreMetodo]()\nRegla: [logica de negocio]"]
+    end
+
+    subgraph repositorio ["Repository"]
+        repo["[NombreRepository]\n[nombreMetodo]()\nQuery: [SELECT/INSERT/UPDATE]"]
+    end
+
+    subgraph modelo ["Model / Entity"]
+        model["[NombreModel]\n[campo1]: [tipo]\n[campo2]: [tipo]"]
+    end
+
+    bd[("[NombreTabla]\nBase de datos")]
+
+    salida["Response [codigo]\n{ [campos de respuesta] }"]
+
+    entrada --> ctrl
+    ctrl --> svc
+    svc --> repo
+    repo --> model
+    model --> bd
+    bd --> salida
