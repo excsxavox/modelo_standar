@@ -1,5 +1,5 @@
-# comandos.ps1 — Menu de acciones de la metodologia
-# Uso: .\metodologia\comandos.ps1
+# comandos.ps1 - Menu de acciones de la metodologia
+# Uso: powershell -ExecutionPolicy Bypass -File "metodologia\comandos.ps1"
 # Ejecutar desde la raiz del proyecto
 
 $metodologia = $PSScriptRoot
@@ -7,11 +7,10 @@ $metodologia = $PSScriptRoot
 function Show-Menu {
     Clear-Host
     Write-Host "=============================================="
-    Write-Host "  METODOLOGIA — MENU DE COMANDOS"
+    Write-Host "  METODOLOGIA - MENU DE COMANDOS"
     Write-Host "=============================================="
     Write-Host ""
 
-    # Mostrar proyecto activo
     $proyectoFile = Join-Path $metodologia "rules\99-proyecto.mdc"
     if (Test-Path $proyectoFile) {
         $nombre = (Get-Content $proyectoFile | Select-String "Nombre:") -replace ".*Nombre:\s*", ""
@@ -24,23 +23,23 @@ function Show-Menu {
     Write-Host "----------------------------------------------"
     Write-Host "  CAMBIOS"
     Write-Host "----------------------------------------------"
-    Write-Host "  [1] Nuevo cambio          -- iniciar una historia o tarea"
-    Write-Host "  [2] Ver cambios activos   -- listar trabajo en curso"
-    Write-Host "  [3] Cerrar cambio         -- sincronizar y archivar"
+    Write-Host "  [1] Nuevo cambio          iniciar una historia o tarea"
+    Write-Host "  [2] Ver cambios activos   listar trabajo en curso"
+    Write-Host "  [3] Cerrar cambio         sincronizar y archivar"
     Write-Host ""
     Write-Host "----------------------------------------------"
     Write-Host "  SPECS (fuente de verdad)"
     Write-Host "----------------------------------------------"
-    Write-Host "  [4] Ver historias         -- specs/historias/"
-    Write-Host "  [5] Ver diseno            -- specs/diseno/"
-    Write-Host "  [6] Ver diagramas         -- specs/diseno/diagramas/"
-    Write-Host "  [7] Ver tecnologias       -- specs/tecnologias/"
+    Write-Host "  [4] Ver historias         specs/historias/"
+    Write-Host "  [5] Ver diseno            specs/diseno/"
+    Write-Host "  [6] Ver diagramas         specs/diseno/diagramas/"
+    Write-Host "  [7] Ver tecnologias       specs/tecnologias/"
     Write-Host ""
     Write-Host "----------------------------------------------"
     Write-Host "  CONFIGURACION"
     Write-Host "----------------------------------------------"
-    Write-Host "  [8] Editar config proyecto  -- 99-proyecto.mdc"
-    Write-Host "  [9] Ver workflow            -- WORKFLOW.md"
+    Write-Host "  [8] Editar config proyecto   99-proyecto.mdc"
+    Write-Host "  [9] Ver workflow             WORKFLOW.md"
     Write-Host "  [0] Salir"
     Write-Host ""
     Write-Host "=============================================="
@@ -61,7 +60,6 @@ function Nuevo-Cambio {
         return
     }
 
-    # Copiar estructura desde _template
     $template = Join-Path $metodologia "trabajo\_template"
     New-Item -ItemType Directory -Force -Path "$destCambio\historias"         | Out-Null
     New-Item -ItemType Directory -Force -Path "$destCambio\diseno\diagramas"  | Out-Null
@@ -69,22 +67,23 @@ function Nuevo-Cambio {
     New-Item -ItemType Directory -Force -Path "$destCambio\pruebas"           | Out-Null
     Copy-Item "$template\ESTADO.md" "$destCambio\ESTADO.md" -ErrorAction SilentlyContinue
 
-    # Actualizar ESTADO.md con el nombre
     $estadoFile = "$destCambio\ESTADO.md"
-    (Get-Content $estadoFile) -replace "\[nombre-cambio\]", $nombre | Set-Content $estadoFile
-    $fecha = Get-Date -Format "yyyy-MM-dd"
-    (Get-Content $estadoFile) -replace "\[fecha\]", $fecha | Set-Content $estadoFile
+    if (Test-Path $estadoFile) {
+        (Get-Content $estadoFile) -replace "\[nombre-cambio\]", $nombre | Set-Content $estadoFile
+        $fecha = Get-Date -Format "yyyy-MM-dd"
+        (Get-Content $estadoFile) -replace "\[fecha\]", $fecha | Set-Content $estadoFile
+    }
 
     Write-Host ""
     Write-Host "[OK] Cambio '$nombre' creado en metodologia/trabajo/$nombre/"
     Write-Host ""
     Write-Host "ESTRUCTURA CREADA:"
-    Write-Host "  metodologia/trabajo/$nombre/ESTADO.md        -- tracker de progreso"
-    Write-Host "  metodologia/trabajo/$nombre/historias/        -- llenar con user-story"
-    Write-Host "  metodologia/trabajo/$nombre/diseno/           -- llenar con diseno"
-    Write-Host "  metodologia/trabajo/$nombre/diseno/diagramas/ -- .mmd por endpoint"
-    Write-Host "  metodologia/trabajo/$nombre/calidad/          -- cleanup si aplica"
-    Write-Host "  metodologia/trabajo/$nombre/pruebas/          -- test-case, validation"
+    Write-Host "  trabajo/$nombre/ESTADO.md         tracker de progreso"
+    Write-Host "  trabajo/$nombre/historias/         llenar con user-story"
+    Write-Host "  trabajo/$nombre/diseno/            llenar con diseno"
+    Write-Host "  trabajo/$nombre/diseno/diagramas/  .mmd por endpoint"
+    Write-Host "  trabajo/$nombre/calidad/           cleanup si aplica"
+    Write-Host "  trabajo/$nombre/pruebas/           test-case y validation"
     Write-Host ""
     Write-Host "SIGUIENTE PASO:"
     Write-Host "  Abre ESTADO.md y activa las fases que necesitas"
@@ -101,13 +100,13 @@ function Ver-CambiosActivos {
         Write-Host "  CAMBIOS ACTIVOS:"
         foreach ($c in $cambios) {
             $estadoFile = Join-Path $c.FullName "ESTADO.md"
-            $pendientes = 0
+            $pendientes  = 0
             $completados = 0
             if (Test-Path $estadoFile) {
                 $pendientes  = (Get-Content $estadoFile | Select-String "\[ \]").Count
                 $completados = (Get-Content $estadoFile | Select-String "\[x\]").Count
             }
-            Write-Host "  -> $($c.Name)   [completados: $completados | pendientes: $pendientes]"
+            Write-Host "  -> $($c.Name)   [ok: $completados | pendiente: $pendientes]"
         }
     }
 }
@@ -138,9 +137,9 @@ function Cerrar-Cambio {
     Write-Host "[OK] Cambio archivado en:"
     Write-Host "  metodologia/trabajo/archive/$fecha-$($cambio.Name)/"
     Write-Host ""
-    Write-Host "SIGUIENTE PASO — sincronizar specs/:"
+    Write-Host "SIGUIENTE PASO - sincronizar specs/:"
     Write-Host "  Copia los artefactos relevantes a metodologia/specs/"
-    Write-Host "  Solo los deltas — no reescribas lo que no cambio"
+    Write-Host "  Solo los deltas, no reescribas lo que no cambio"
 }
 
 function Abrir-Carpeta($ruta) {
@@ -157,7 +156,7 @@ function Abrir-Carpeta($ruta) {
     }
 }
 
-# ─── Loop principal ───────────────────────────────────────────────────────────
+# Loop principal
 do {
     Show-Menu
     $opcion = Read-Host "Selecciona una opcion"
@@ -172,13 +171,11 @@ do {
         "7" { Abrir-Carpeta "specs\tecnologias" }
         "8" {
             Write-Host ""
-            Write-Host "  Abre el archivo:"
-            Write-Host "  -> metodologia/rules/99-proyecto.mdc"
+            Write-Host "  Abre: metodologia/rules/99-proyecto.mdc"
         }
         "9" {
             Write-Host ""
-            Write-Host "  Abre el archivo:"
-            Write-Host "  -> metodologia/WORKFLOW.md"
+            Write-Host "  Abre: metodologia/WORKFLOW.md"
         }
         "0" { Write-Host "Hasta luego." }
         default { Write-Host "  Opcion no valida, intenta de nuevo." }
