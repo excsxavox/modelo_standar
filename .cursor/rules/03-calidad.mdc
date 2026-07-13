@@ -1,0 +1,20 @@
+---
+description: Estándares de calidad y limpieza de código
+alwaysApply: true
+---
+
+# Calidad de código
+
+Aplicar siempre al implementar o revisar:
+- Una función = una responsabilidad
+- Nombres que describan intención, no implementación
+- Sin efectos secundarios inesperados en funciones puras
+- Sin magic numbers — usar constantes con nombre
+
+# Limpieza de código
+
+Activar antes de implementar si hay deuda técnica visible:
+- Eliminar código muerto o comentado sin razón
+- Eliminar duplicados — extraer a función o módulo compartido
+- Verificar que no haya imports o variables sin usar
+- Usar plantilla: `metodologia/templates/cleanup.md`
