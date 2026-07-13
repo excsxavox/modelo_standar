@@ -1,35 +1,45 @@
 # Flujo de trabajo con el agente
 
-## Estructura de carpetas del proyecto
+## Estructura de carpetas
+
+### Módulo de metodología (este repo — se copia a cualquier proyecto)
 
 ```
-proyecto/
-  specs/                         ← FUENTE DE VERDAD (lo que existe hoy)
+metodologia/                     ← módulo independiente, mover a cualquier proyecto
+  rules/                         ← reglas del agente (fuente de verdad)
+    00-perfil.mdc
+    01-fases.mdc
+    02-historias.mdc
+    03-calidad.mdc
+    04-pruebas.mdc
+    99-proyecto.mdc              ← único que editas por proyecto/rama
+  templates/                     ← plantillas reutilizables
+    historias/
+    diseno/
+    calidad/
+    pruebas/
+  specs/                         ← estructura base de specs/ (se copia al proyecto)
+  trabajo/                       ← estructura base de trabajo/ (se copia al proyecto)
+    _template/
+    archive/
+  setup.ps1                      ← activa todo en el proyecto destino
+  WORKFLOW.md
+```
+
+### Proyecto destino (después de correr setup.ps1)
+
+```
+mi-proyecto/
+  metodologia/                   ← módulo copiado aquí
+  specs/                         ← creado por setup.ps1 — FUENTE DE VERDAD
     historias/                   ← historias completadas
     diseno/                      ← arquitectura, frontend, backend actuales
     tecnologias/                 ← stack vigente
-
-  trabajo/                       ← cambios activos e histórico
-    _template/                   ← plantilla base para cada cambio
-      ESTADO.md
-      historias/
-      diseno/
-      calidad/
-      pruebas/
-    [nombre-cambio]/             ← un cambio activo
-      ESTADO.md
-      historias/
-      diseno/
-      pruebas/
+  trabajo/                       ← creado por setup.ps1
+    _template/
+    [nombre-cambio]/             ← cambio activo
     archive/                     ← cambios cerrados
-      2026-07-12-login/
-      2026-07-13-carrito/
-
-  metodologia/                   ← metodología (este repo)
-    rules/
-    templates/
-    setup.ps1
-    WORKFLOW.md
+  .cursor/rules/                 ← creado por setup.ps1 — Cursor los lee
 ```
 
 ---
