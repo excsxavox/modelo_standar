@@ -29,18 +29,28 @@ metodologia/                     ← módulo independiente, mover a cualquier pr
 ### Proyecto destino (después de correr setup.ps1)
 
 ```
-mi-proyecto/
-  metodologia/                   ← módulo copiado aquí
-  specs/                         ← creado por setup.ps1 — FUENTE DE VERDAD
-    historias/                   ← historias completadas
-    diseno/                      ← arquitectura, frontend, backend actuales
-    tecnologias/                 ← stack vigente
-  trabajo/                       ← creado por setup.ps1
-    _template/
-    [nombre-cambio]/             ← cambio activo
-    archive/                     ← cambios cerrados
-  .cursor/rules/                 ← creado por setup.ps1 — Cursor los lee
+mi-proyecto/                     ← código del proyecto (sin polución)
+  src/
+  package.json
+  ...
+  metodologia/                   ← TODO el contexto vive aquí
+    rules/                       ← reglas del agente
+    templates/                   ← plantillas
+    specs/                       ← creado por setup.ps1 — FUENTE DE VERDAD
+      historias/
+      diseno/
+        diagramas/               ← .mmd por controlador/endpoint
+      tecnologias/
+    trabajo/                     ← creado por setup.ps1
+      _template/
+      [nombre-cambio]/           ← cambio activo
+      archive/                   ← cambios cerrados
+    setup.ps1
+    WORKFLOW.md
+  .cursor/rules/                 ← creado por setup.ps1 (Cursor requiere aquí)
 ```
+
+> El proyecto real no se contamina. Todo el contexto de la metodología vive dentro de `metodologia/`.
 
 ---
 
