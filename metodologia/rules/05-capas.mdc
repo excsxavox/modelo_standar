@@ -1,0 +1,64 @@
+---
+description: Orden lógico de capas - lectura top-down, desarrollo inside-out
+alwaysApply: true
+---
+
+# Arquitectura por capas
+
+## Mapa de capas (siempre en este orden)
+
+```
+ENTRADA
+  └── Route / Endpoint          ← define el contrato HTTP
+        └── Controller          ← valida request, orquesta la respuesta
+              └── Service       ← lógica de negocio, reglas del dominio
+                    └── Repository ← acceso a datos, queries
+                          └── Model / Entity ← estructura de datos
+                                └── Base de datos / API externa
+SALIDA
+```
+
+---
+
+# Modo 1 — Código existente: leer de afuera hacia adentro
+
+Cuando el agente analiza o sincroniza código ya existente, debe leer en este orden:
+
+1. **Route** → ¿qué endpoints existen? ¿qué métodos y rutas?
+2. **Controller** → ¿qué valida? ¿qué servicio llama? ¿qué retorna?
+3. **Service** → ¿qué lógica aplica? ¿qué reglas de negocio?
+4. **Repository** → ¿qué consultas hace? ¿cómo accede a los datos?
+5. **Model / Entity** → ¿qué campos tiene? ¿qué relaciones?
+6. **BD / Externo** → ¿qué tablas o esquemas existen?
+
+Objetivo: entender el flujo completo antes de proponer cualquier cambio.
+Documentar en `specs/diseno/backend.md` capa por capa.
+
+---
+
+# Modo 2 — Código nuevo: construir de adentro hacia afuera
+
+Cuando no existe nada, desarrollar en este orden:
+
+1. **Model / Entity** → definir la estructura de datos primero
+2. **Migración / Esquema BD** → crear las tablas o colecciones
+3. **Repository** → implementar el acceso a datos
+4. **Service** → implementar la lógica de negocio
+5. **Controller** → implementar la validación y orquestación
+6. **Route / Endpoint** → exponer el contrato HTTP
+7. **Response** → definir el formato de salida
+
+Nunca implementar una capa sin tener la capa inferior lista.
+
+---
+
+# Sincronización con specs/
+
+Al cerrar un cambio, actualizar `specs/diseno/backend.md`
+documentando cada capa afectada en el orden del Mapa de capas:
+
+```
+ENTRADA → Route → Controller → Service → Repository → Model → BD → SALIDA
+```
+
+Solo registrar las capas que cambiaron — no reescribir las que no se tocaron.

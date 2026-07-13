@@ -38,6 +38,14 @@ src/
 
 ---
 
+## Flujo de capas (usar flujo-capas.md para el detalle completo)
+
+> Ver `metodologia/templates/diseno/flujo-capas.md` para la ramificación completa.
+
+**Modo de desarrollo:**
+- [ ] Código existente → leer top-down: Route → Controller → Service → Repository → Model
+- [ ] Código nuevo → construir inside-out: Model → Repository → Service → Controller → Route
+
 ## Endpoints del módulo
 
 | Método | Ruta | Descripción | Auth | Request Body | Response |
