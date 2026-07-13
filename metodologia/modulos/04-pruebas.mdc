@@ -1,0 +1,28 @@
+---
+description: Estándares de pruebas unitarias y validación funcional
+alwaysApply: true
+---
+
+# Pruebas unitarias
+
+Estructura AAA obligatoria:
+```
+// Arrange: preparar datos y dependencias
+// Act:     ejecutar la función bajo prueba
+// Assert:  verificar el resultado esperado
+```
+
+Cubrir siempre:
+- Ruta principal (happy path)
+- Casos borde (null, vacío, límites)
+- Errores esperados
+
+Usar plantilla: `metodologia/templates/test-case.md`
+
+# Validación funcional
+
+Al terminar la implementación:
+- Verificar cada criterio de aceptación de las historias de usuario
+- Marcar como cumplido o pendiente en la plantilla
+- Confirmar con el usuario antes de cerrar el cambio
+- Usar plantilla: `metodologia/templates/validation.md`

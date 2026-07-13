@@ -1,0 +1,24 @@
+---
+description: Estándar de historias de usuario
+alwaysApply: true
+---
+
+# Historias de usuario
+
+Formato estándar:
+```
+Como [rol], quiero [acción], para [beneficio].
+```
+
+Reglas:
+- Cada historia tiene al menos un criterio de aceptación medible
+- Incluir escenario positivo (happy path) y al menos uno negativo
+- Si el requerimiento es vago, proponer historias antes de continuar
+- Usar plantilla: `metodologia/templates/user-story.md`
+
+Criterios de aceptación:
+```
+DADO [contexto inicial]
+CUANDO [acción del usuario]
+ENTONCES [resultado esperado]
+```
