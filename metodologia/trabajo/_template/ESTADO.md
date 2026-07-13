@@ -3,7 +3,6 @@
 **Historia(s):** US-[número]
 **Fecha de inicio:** [fecha]
 **Fecha de cierre:** [fecha]
-**Rama git:** `trabajo/[nombre-cambio]`
 
 ---
 
@@ -26,18 +25,12 @@
 
 - [ ] [tarea 1]
 - [ ] [tarea 2]
-- [ ] [tarea 3]
 
 ---
 
 ## Sync con specs/ al cerrar
 
-- [ ] `specs/historias/` actualizado con las nuevas historias
-- [ ] `specs/diseno/` actualizado con cambios de arquitectura
-- [ ] `specs/tecnologias/` actualizado si hubo cambios de stack
-- [ ] Carpeta movida a `trabajo/archive/[fecha]-[nombre-cambio]/`
-
----
-
-## Notas
-- [observaciones, decisiones tomadas durante el desarrollo]
+- [ ] `specs/historias/` actualizado
+- [ ] `specs/diseno/` actualizado (solo deltas)
+- [ ] `specs/tecnologias/stack.md` actualizado si hubo cambios
+- [ ] Carpeta movida a `trabajo/archive/[YYYY-MM-DD]-[nombre-cambio]/`

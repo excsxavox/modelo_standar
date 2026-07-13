@@ -1,0 +1,8 @@
+# Generados por setup.ps1 en cada rama de proyecto
+# No deben existir en main
+specs/
+trabajo/
+!metodologia/trabajo/
+
+# Cursor
+.cursor/rules/
